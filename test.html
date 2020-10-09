@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>我是一颗树啊</title>
+    <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.g6-3.7.1/dist/g6.min.js"></script>
 </head>
 <body>
 <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
@@ -44,18 +45,18 @@
     {
         var Text = document.getElementById("inputtext").value;
 
-        var lines = Text.split("\n"); //lines获取文本
+        var Lines = Text.split("\n"); //lines获取文本
 
-        for (var i = 0; i < Lines.length; i++) {
+        for (var i = 0; i < Lines.length; i++)
+        {
 
-        }
-            if(lines[i].length==0)
+            if(Lines[i].length==0)
             {             //跳过空行
 
                 continue;
             }
 
-            if(lines[i].substr(0,2)=="导师") //导师处理
+            if(Lines[i].substr(0,2)=="导师") //导师处理
             {
 
                 ID++;       //每个人拥有ID编号，ID对应的数组内容标识个人信息
@@ -87,7 +88,7 @@
                     name[ID]=namex[i][j];
                 }
 
-            }
+                }
 
         }
 
@@ -119,13 +120,12 @@
         }
 
     }
-    var y1 = JSON.stringify(x1);
-    var y2 = JSON.stringify(y1);
+    var y1 = JSON.stringify(x1);//生成json字符串
+    var y2 = JSON.parse(y1);//将json字符串转成json对象
 
     <!--开始创建图    -->
-    <div id="mountNode"></div>
-        <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.g6-3.7.1/dist/g6.min.js"></script>
-<script>
+        <script>
+            //初始化图
     const treeGraph = new G6.TreeGraph({
         container: 'mountNode',
         width: 800,
@@ -155,6 +155,7 @@
             radial: true,
         },
     });
+    //添加结点信息
     treeGraph.addChild(y2, 'root')
 
 </body>
