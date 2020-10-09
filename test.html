@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+
+    <textarea id="inputtext" placeholder="请以文本形式输入后点击提交，提交格式如下：
+
+导师：张三
+
+2016级博士生：天一、王二、吴五
+
+2015级硕士生：李四、王五、许六
+
+2016级硕士生：刘一、李二、李三
+
+2017级本科生：刘六、琪七、司四
+
+
+
+" rows="50" cols="80"></textarea>
+    <!--    制作输入文本框-->
+    <button onclick="submittext(),test()">提交</button>
+
+</div>
+<!--    分割输入内容,这里很重要，关系到接下来json格式的转换-->
+<script>
+
+    var ID=0;//注意注意底下的编号是从1开始的
+    var ID1=0;//用来暂时存放一些值
+    var teacher_num=0;
+    var degree_num=new Array();//用来存储一个老师带几个年级的学生
+    var student_num=new Array();//用来存储一个年级有几个学生，注意本师门树每一个结点的id不一样，所以就是即使年级相同，老师不同，id也会不一样
+
+    var who=new Array();
+    //who表示身份，1是导师，2是年级，3是学生。
+    //name用来存储具体的内容，导师姓名，学生姓名，具体学位名称。
+
+    function submittext() //解析输入 每个人赋予一个ID表示身份和相应信息数组
+    {
+        var Text = document.getElementById("inputtext").value;
+
+        var lines = Text.split("\n"); //lines获取文本
+
+        for (var i = 0; i < Lines.length; i++) {
+
+        }
+            if(lines[i].length==0){             //跳过空行
+
+                continue;
+            }
+
+            if(lines[i].substr(0,2)=="导师") //导师处理
+            {
+
+                ID++;       //每个人拥有ID编号，ID对应的数组内容标识个人信息
+                who[ID]=1; //这个人是导师
+                teacher_num++;
+                name[ID]= Lines[i].substring(3);//存储导师姓名
+                ID1=ID;
+                degree_num[ID1]=0;//每开始一棵师门树，则初始这个老师所带的年级数为0；
+            }
+
+            else{                       //非导师处理
+
+                //学位年级结点
+                var temp= Lines[i].substring(0,8);
+                ID++;
+                who[ID]=2;
+                name[ID]=temp;
+                degree_num[ID1]++;
+
+
+                //分割后面的姓名
+                var tempNameString  = Lines[i].substring(Lines[i].search("：")+1);
+                namex[i] = tempNameString.split("、");
+
+                for(var j=0;j<namex[i].length;j++)//每个人分配ID  并且存储相关信息
+                {
+                    ID++;
+                    who[ID]=2;
+                    name[ID]=namex[i][j];
+                }
+
+            }
+
+        }
+
+
+
+    <!--树形json格式的强行转换    -->
+    for(var k=0;k<teachernum;k++)//第一层树
+    {
+        ID++;//老师结点遍历
+        if(who[ID]==1)//如果是老师
+        {
+            var x1={id:name[ID],children:[]};
+            for(i=1;i<=degree_num[ID];i++)//第二层树
+            {
+                ID++;//学位结点遍历
+                var x2 = new Object();
+                x2.id=ID;
+                x2.children=new Array();
+                ID1=ID;
+                for(j=1;j<=student_num[ID1];j++)
+                {
+                    ID++;
+                    var x3 = new Object();
+                    x3.id=name[ID];
+                    x2.children.push(x3);
+                }
+                x1.children.push(x2);
+            }
+        }
+
+    }
+    hell = JSON.stringify(test2);
+
+
+
+</body>
+</html>

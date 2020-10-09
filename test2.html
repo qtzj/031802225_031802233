@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+
+    <textarea id="inputtext" placeholder="请以文本形式输入后点击提交，提交格式如下：
+
+导师：张三
+
+2016级博士生：天一、王二、吴五
+
+2015级硕士生：李四、王五、许六
+
+2016级硕士生：刘一、李二、李三
+
+2017级本科生：刘六、琪七、司四
+
+
+
+" rows="50" cols="80"></textarea>
+    <!--    制作输入文本框-->
+    <button onclick="submittext(),test()">提交</button>
+
+</div>
+<!--    师门树操作部分：开始分割重要输入内容,这里很重要，关系到接下来json格式的转换-->
+<script>
+
+    var name= new Array(),degree=new Array();
+
+    var ID=0,PID=0;
+
+    var hell,branch2=0;
+
+    var teacher_num=0,degree_num=new Array(),student_num=new Array(),;
+    //teacher_num用于统计老师总数目以及标识第几个老师、老师带的年级数目、每个年级里对应的学生数
+    //degree_num[teacher_num]这个老师带的年级数目及带的第几个年级
+    //degree_num[]
+    var help=new Array();
+
+    function submittext() {             //解析输入 每个人赋予一个ID表示身份和相应信息数组
+
+        var Text = document.getElementById("inputtext").value;
+
+        var lines = Text.split("\n"); //lines获取文本
+
+        var namex = new Array();
+
+
+        // nameString存：后内容，namex存名字
+
+        var branch= 0;
+
+        for (var i = 0; i < Lines.length; i++) {
+
+            if(lines[i].length==0){             //跳过空行
+
+                continue;
+
+            }
+
+            if(lines[i].substr(0,2)=="导师") //导师处理
+            {
+
+                ID++;                          //每个人拥有ID编号，ID对应的数组内容标识个人信息
+
+                name[ID]= Lines[i].substring(3);
+
+                degree_num[teacher_num]=0;
+
+                teacher_num++;
+
+            }
+
+            else{                       //非导师处理
+
+                var temp= Lines[i].substring(0,8);
+
+
+                var tempNameString  = Lines[i].substring(Lines[i].search("：")+1);
+
+                namex[i] = tempNameString.split("、");
+
+                degree_num[teacher_num-1]++;
+
+                for(var j=0;j<namex[i].length;j++){      //每个人分配ID  并且存储相关信息
+
+                    ID++;
+
+                    degree[ID]=temp;
+
+                    name[ID]=namex[i][j];
+
+                }
+
+                student_num[branch]=namex[i].length;
+
+                branch++;
+
+            }
+
+        }
+
+        <!--    将输入的数据转成json,引入G6的数据源必须为json-->
+        var idx=0;var k2=0;var k3=0;
+
+        for(var k1=0;k1<teacher_num;k1++){
+
+            idx++;
+
+            var test2={id:name[IDD],children:[]};           //对test2动态构建json
+
+            for(var i=1;i<=degree_num[k2];i++)
+            {
+
+                var x = new Object();
+
+                x.id=degree[idx+1];
+
+                x.children=new Array();
+
+                for(var j=1;j<=studen_tnum[kkk];j++){
+
+                    var yyy = new Object();
+
+                    IDD++;
+
+                    yyy.id=NAME[IDD];
+
+                    xxx.children.push(yyy);
+
+                }
+
+                test2.children.push(xxx);
+
+                kkk++;
+
+            }
+
+            kk++;
+
+            hell = JSON.stringify(test2);
+        </body>
+            </html>
