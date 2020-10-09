@@ -5,8 +5,10 @@
     <title>Title</title>
 </head>
 <body>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+</script>
+<!--    制作输入文本框-->
 <div>
-
     <textarea id="inputtext" placeholder="请以文本形式输入后点击提交，提交格式如下：
 
 导师：张三
@@ -22,7 +24,6 @@
 
 
 " rows="50" cols="80"></textarea>
-    <!--    制作输入文本框-->
     <button onclick="submittext(),test()">提交</button>
 
 </div>
@@ -48,7 +49,8 @@
         for (var i = 0; i < Lines.length; i++) {
 
         }
-            if(lines[i].length==0){             //跳过空行
+            if(lines[i].length==0)
+            {             //跳过空行
 
                 continue;
             }
@@ -117,9 +119,43 @@
         }
 
     }
-    hell = JSON.stringify(test2);
+    var y1 = JSON.stringify(x1);
+    var y2 = JSON.stringify(y1);
 
-
+    <!--开始创建图    -->
+    <div id="mountNode"></div>
+        <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.g6-3.7.1/dist/g6.min.js"></script>
+<script>
+    const treeGraph = new G6.TreeGraph({
+        container: 'mountNode',
+        width: 800,
+        height: 600,
+        modes: {
+            default: [
+                {
+                    type: 'collapse-expand',
+                    onChange(item, collapsed) {
+                        const icon = item.get('group').findByClassName('collapse-icon');
+                        if (collapsed) {
+                            icon.attr('symbol', EXPAND_ICON);
+                        } else {
+                            icon.attr('symbol', COLLAPSE_ICON);
+                        }
+                    },
+                },
+                'drag-canvas',
+                'zoom-canvas',
+            ],
+        },
+        layout: {
+            type: 'dendrogram',
+            direction: 'LR', // H / V / LR / RL / TB / BT
+            nodeSep: 50,
+            rankSep: 100,
+            radial: true,
+        },
+    });
+    treeGraph.addChild(y2, 'root')
 
 </body>
 </html>
