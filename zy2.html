@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>INDEX</title>
+    <style>
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        html,
+        body {
+            overflow: scroll;
+            margin: 0;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="mountNode"></div>
+    <script>/*Fixing iframe window.innerHeight 0 issue in Safari*/document.body.clientHeight;</script>
+    <script src="./g66.js"></script>
+    <script src="./jquery-3.2.1.min.js"></script>
+    <script src="./hierarchy.js"></script>
+
+    <div style="width:70px;height:300px;overflow-x:auto;overflow-y:auto"></div>
+    <div>
+        <textarea id="inputtext" placeholder="请以文本形式输入后点击提交
+导师：张三
+2016级博士生：天一、王二、吴五
+2015级硕士生：李四、王五、许六
+2016级硕士生：刘一、李二、李三
+2017级本科生：刘六、琪七、司四
+PS：冒号和顿号皆全角输入
+生成树可用滑动滚轮调整大小
+生成树数量太多可缩放网页大小或在右侧滑动滚轮查看
+
+" rows="20" cols="40"></textarea>
+        <button onclick="submittext(),test()">提交</button>
+        <!--    <button onclick="test()">test</button>-->
+        <!--    <button onclick="test2()">test2</button>-->
+        <!--        <button onclick="jjjj()">json</button>-->
+    </div>
+    <script src="zy2.js">
+        
+    </script>
+</body>
+
+</html>
