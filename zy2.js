@@ -1,4 +1,5 @@
 var NAME = new Array(), degree = new Array(), year = new Array();
+var attris = new Array();
 var ID = 0, PID = 0;
 var hell, branch2 = 0;
 var teachernum = 0, studentnum = new Array(), degreenum = new Array();  //有几个老师、每个学位有几个学生、每个导师带几个年段
@@ -23,9 +24,9 @@ function submittext() {             //解析输入 每个人赋予一个IDD和�
             degreenum[teachernum] = 0;
             teachernum++;
         }
-        else {                       //非导师处理
-            var temp1 = Lines[i].substring(0, 4);
-            var temp2 = Lines[i].substr(5, 2);
+        else if(/^\d+$/.test(teacher[i])) {                       //非导师处理
+            var temp1 = Lines[i].substring(0, 4); //temp1为年级
+            var temp2 = Lines[i].substr(5, 2); //temp2为学位等级
             var tempNameString = Lines[i].substring(Lines[i].search("：") + 1);
             name[i] = tempNameString.split("、");
 
@@ -39,6 +40,15 @@ function submittext() {             //解析输入 每个人赋予一个IDD和�
             }
             studentnum[branch] = name[i].length;
             branch++;
+        }
+        // else console.log("非标准输入");
+        else {
+            linestr = Lines[i];
+            var posi = linestr.search("：");
+            var stuName = linestr.substring(0, posi);
+            var tempAttris = linestr.substring(posi+1).split("、");
+            attris[stuName] = tempAttris;
+            console.log(attris);
         }
     }
     // console.log("over");
@@ -70,6 +80,18 @@ function test() {                //创建json格式对象
                 var yyy = new Object();
                 IDD++;
                 yyy.id = NAME[IDD];
+                yyy.children = new Array();
+                // 增加个人经历
+                if(attris.hasOwnProperty(yyy.id)) {
+                    console.log("has");
+                    for(var k = 0; k < attris[yyy.id].length; k++) {
+                        var yyychild = new Object();
+                        yyychild.id = attris[yyy.id][k];
+                        yyychild.children = new Array();
+                        yyy.children.push(yyychild);
+                    }
+                }
+
                 xxx.children.push(yyy);
             }
             test2.children.push(xxx);
@@ -110,7 +132,7 @@ function test() {                //创建json格式对象
                     size: 16,
                     anchorPoints: [[0, 0.5], [1, 0.5]],
                     style: {
-                        fill: '#59ff15',
+                        fill: '#CCFF00',
                         stroke: '#d91808'
                     }
                 },
@@ -149,8 +171,8 @@ function test() {                //创建json格式对象
                 return {
                     size: 26,
                     style: {
-                        fill: '#171bff',		//节点颜色
-                        stroke: '#fff9f6'	//节点边框
+                        fill: '#CCFF00',		//节点颜色
+                        stroke: '#2BD54D'	//节点边框
                     },
                     label: node.id,
                     labelCfg: {
