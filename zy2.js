@@ -115,7 +115,7 @@ function test() {                //创建json格式对象
             // function pick (data=hell) {
             var graph = new G6.TreeGraph({
                 container: 'mountNode',
-                width: 800,
+                width: 1600,
                 height: 1200,
                 pixelRatio: 2,
                 modes: {
