@@ -5,6 +5,13 @@
     <meta charset="UTF-8">
     <title>INDEX</title>
     <style>
+        #header {
+            background-color:#87CEFA;
+            color:white;
+            text-align:center;
+            padding:5px;
+        }
+
         ::-webkit-scrollbar {
             display: none;
         }
@@ -18,30 +25,34 @@
 
 </head>
 
-<body>
+<body bgcolor="#F0F8FF">
+
+    <div id="header">
+    <h1>welcome to 实验室师门树技能树查看</h1>
+    </div>
+
     <div id="mountNode"></div>
     <script>/*Fixing iframe window.innerHeight 0 issue in Safari*/document.body.clientHeight;</script>
     <script src="./g66.js"></script>
     <script src="./jquery-3.2.1.min.js"></script>
     <script src="./hierarchy.js"></script>
 
-    <div style="width:70px;height:300px;overflow-x:auto;overflow-y:auto"></div>
+    <div style="width:70px;height:50px;overflow-x:auto;overflow-y:auto"></div>
     <div>
-        <textarea id="inputtext" placeholder="请以文本形式输入后点击提交
+        <textarea id="inputtext"  placeholder="请以文本形式输入后点击生成师门树
 导师：张三
 2016级博士生：天一、王二、吴五
 2015级硕士生：李四、王五、许六
 2016级硕士生：刘一、李二、李三
 2017级本科生：刘六、琪七、司四
-PS：冒号和顿号皆全角输入
-生成树可用滑动滚轮调整大小
-生成树数量太多可缩放网页大小或在右侧滑动滚轮查看
+刘六：JAVA、数学建模
+李二：字节跳动、京东云
 
-" rows="20" cols="40"></textarea>
-        <button onclick="submittext(),test()">提交</button>
-        <!--    <button onclick="test()">test</button>-->
-        <!--    <button onclick="test2()">test2</button>-->
-        <!--        <button onclick="jjjj()">json</button>-->
+" rows="30" cols="500" ></textarea>
+        <button onclick="submittext(),test()">生成</button>
+        <button onclick="cleartext()">清空</button>
+
+
     </div>
     <script src="zy2.js">
         

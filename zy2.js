@@ -4,6 +4,10 @@ var ID = 0, PID = 0;
 var hell, branch2 = 0;
 var teachernum = 0, studentnum = new Array(), degreenum = new Array();  //有几个老师、每个学位有几个学生、每个导师带几个年段
 var help = new Array();
+
+function cleartext() {
+  location.reload();
+}
 function submittext() {             //解析输入 每个人赋予一个IDD和相应信息数组
     var Text = document.getElementById("inputtext").value;
     var Lines = Text.split("\n");
@@ -41,7 +45,7 @@ function submittext() {             //解析输入 每个人赋予一个IDD和�
             studentnum[branch] = name[i].length;
             branch++;
         }
-        // else console.log("非标准输入");
+        //技能树生成
         else {
             linestr = Lines[i];
             var posi = linestr.search("：");
@@ -213,4 +217,7 @@ function test() {                //创建json格式对象
         // // console.log("ssssssssss this is k",+k);
         // // <button>hhss<button>
     }
-}
+
+
+  }
+
