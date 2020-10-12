@@ -47,18 +47,17 @@ function submittext() {             //解析输入 每个人赋予一个IDD和�
         }
         //技能树生成
         else {
-            linestr = Lines[i];
+            var linestr = Lines[i];
             var posi = linestr.search("：");
             var stuName = linestr.substring(0, posi);
             var tempAttris = linestr.substring(posi+1).split("、");
             attris[stuName] = tempAttris;
-            console.log(attris);
+            // console.log(attris);
         }
     }
-    // console.log("over");
-    // console.log(teachernum);
-    // console.log(studentnum);
-    // console.log(degreenum)
+    console.log(year);
+    console.log(degree);
+    console.log(attris);
 }
 ////////////////////////////////////////////////////////////////
 function test() {                //创建json格式对象
